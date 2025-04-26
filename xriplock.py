@@ -9,12 +9,13 @@ init(autoreset=True)
 # for_zip
 def cracking_zip(zip_file, wordlist, start_line=0, end_line=None):
     with pyzipper.AESZipFile(zip_file) as zipfile:
+        test_file = zipfile.namelist()[0]
         with open(wordlist, 'r', encoding='UTF-8', errors='ignore') as file:
             passes_list = file.readlines()[start_line:end_line]
             for password in passes_list:
                 password = password.strip()
                 try:
-                    zipfile.extractall(pwd=password.encode('UTF-8'))
+                    zipfile.read(test_file, pwd=password.encode('UTF-8'))
                     time.sleep(0.1)
                     print(Fore.YELLOW + f"[+] Valid: {password}")
                     return password
@@ -23,16 +24,16 @@ def cracking_zip(zip_file, wordlist, start_line=0, end_line=None):
                     print(Fore.LIGHTRED_EX + f"[~] Invalid: {password[:100]}", end="\n")
     return None
 
-
 # for_rar
 def cracking_rar(rar_file, wordlist, start_line=0, end_line=None):
     with rarfile.RarFile(rar_file) as rf:
+        test_file = rf.namelist()[0]
         with open(wordlist, 'r', encoding='UTF-8', errors='ignore') as file:
             passes_list = file.readlines()[start_line:end_line]
             for password in passes_list:
                 password = password.strip()
                 try:
-                    rf.extractall(pwd=password)
+                    rf.read(test_file, pwd=password.encode('utf-8'))
                     print(Fore.YELLOW + f"[+] Valid: {password}")
                     return password
                 except:
@@ -61,15 +62,18 @@ def main_cracking_process():
     while True:
         archive_file_path = input(Fore.LIGHTYELLOW_EX + "Enter the file path (zip/rar): " + Style.RESET_ALL).strip('"')
         if os.path.exists(archive_file_path):
-            time.sleep(0.5)
-            print(Fore.LIGHTCYAN_EX + "\n[+] File imported!\n")
-            break
+            if archive_file_path.lower().endswith(('.zip', '.rar')):
+                time.sleep(0.5)
+                print(Fore.LIGHTCYAN_EX + "\n[+] File imported!\n")
+                break
+            else:
+                print(Fore.LIGHTRED_EX + "\n[!] Invalid File Input.\n")
         else:
-            print(Fore.LIGHTRED_EX + "\n[!] Invalid File.\n")
+            print(Fore.LIGHTRED_EX + "\n[!] Invalid File Input.\n")
 
     while True:
         wordlist_file_path = input(Fore.LIGHTYELLOW_EX + "Enter wordlist path: " + Style.RESET_ALL).strip('"')
-        if os.path.exists(wordlist_file_path):
+        if os.path.exists(wordlist_file_path) and wordlist_file_path.lower().endswith('.txt'):
             time.sleep(0.5)
             print(Fore.LIGHTCYAN_EX + "\n[+] Wordlist imported!\n")
             break
