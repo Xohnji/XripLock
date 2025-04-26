@@ -3,7 +3,9 @@ Brute-Force ZIP/RAR Unlocker.
 
 *uses dictionary attack to brute-force the password for zip/rar file*
 
-must: `pip install -r requirements.txt`
+must: `python3 -m venv venv
+       source venv/bin/activate
+       pip install -r requirements.txt`
 
 For RAR files It requires the 'unrar' program.
 
