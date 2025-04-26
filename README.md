@@ -10,6 +10,7 @@ For RAR files It requires the 'unrar' program.
 Check out [RARLAB](https://www.rarlab.com/rar_add.htm) for more info.
 
 Linux:
+
   Debian/Ubuntu-based distros:
   `sudo apt-get install unrar`
 
