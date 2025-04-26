@@ -3,7 +3,8 @@ Brute-Force ZIP/RAR Unlocker
 
 must: `pip install -r requirements.txt`
 
-For RAR files It requires the 'unrar' program
+For RAR files It requires the 'unrar' program.
+
 Check out [RARLAB](https://www.rarlab.com/rar_add.htm) for more info.
 
 Linux:
