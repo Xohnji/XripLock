@@ -5,13 +5,9 @@ Brute-Force ZIP/RAR Unlocker.
 
 ---
 
-must:
-       
-       python3 -m venv venv
-       
-       venv/bin/activate
-       
-       pip install -r requirements.txt
+must:  `python3 -m venv venv`
+       `venv/bin/activate`
+       `pip install -r requirements.txt`
 
 For RAR files It requires the 'unrar' program.
 
