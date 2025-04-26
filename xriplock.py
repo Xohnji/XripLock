@@ -9,13 +9,13 @@ init(autoreset=True)
 # for_zip
 def cracking_zip(zip_file, wordlist, start_line=0, end_line=None):
     with pyzipper.AESZipFile(zip_file) as zipfile:
-        test_file = zipfile.namelist()[0]
+        reader_file = zipfile.namelist()[0]
         with open(wordlist, 'r', encoding='UTF-8', errors='ignore') as file:
             passes_list = file.readlines()[start_line:end_line]
             for password in passes_list:
                 password = password.strip()
                 try:
-                    zipfile.read(test_file, pwd=password.encode('UTF-8'))
+                    zipfile.read(reader_file, pwd=password.encode('UTF-8'))
                     time.sleep(0.1)
                     print(Fore.YELLOW + f"[+] Valid: {password}")
                     return password
@@ -27,13 +27,13 @@ def cracking_zip(zip_file, wordlist, start_line=0, end_line=None):
 # for_rar
 def cracking_rar(rar_file, wordlist, start_line=0, end_line=None):
     with rarfile.RarFile(rar_file) as rf:
-        test_file = rf.namelist()[0]
+        reader_file = rf.namelist()[0]
         with open(wordlist, 'r', encoding='UTF-8', errors='ignore') as file:
             passes_list = file.readlines()[start_line:end_line]
             for password in passes_list:
                 password = password.strip()
                 try:
-                    rf.read(test_file, pwd=password.encode('utf-8'))
+                    rf.read(reader_file, pwd=password.encode('utf-8'))
                     print(Fore.YELLOW + f"[+] Valid: {password}")
                     return password
                 except:
