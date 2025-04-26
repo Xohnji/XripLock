@@ -8,13 +8,13 @@ Check out [RARLAB][https://www.rarlab.com/rar_add.htm] for more info.
 
 Linux:
   Debian/Ubuntu-based distros:
-  *sudo apt-get install unrar*
+  `sudo apt-get install unrar`
 
   Arch Linux:
-    *sudo pacman -S unrar*
+    `sudo pacman -S unrar`
 
   Fedora:
-    *sudo dnf install unrar*
+    `sudo dnf install unrar`
 
 MacOS:
-  *brew install unrar*
+  `brew install unrar`
