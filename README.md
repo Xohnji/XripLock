@@ -1,5 +1,7 @@
 # XripLock
 Brute-Force ZIP/RAR Unlocker
+*uses dictionary attack to brute-force the password for zip/rar file*
+
 
 must: `pip install -r requirements.txt`
 
