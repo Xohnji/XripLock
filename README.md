@@ -12,7 +12,7 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-For RAR files It requires the 'unrar' program.
+For RAR files It requires the 'UnRAR' program.
 
 Check out [RARLAB](https://www.rarlab.com/rar_add.htm) for more info.
 
