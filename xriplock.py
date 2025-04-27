@@ -10,7 +10,7 @@ gateway_exit = False # This will not gonna work once the threads start processin
 invalid_attempts_counter = 0
 invalid_attempts_LockedIn = threading.Lock()
 
-# DISCLAIMER: If you don't trust this code, just use 'John the Ripper' Even I don't trust this lol.
+# DISCLAIMER: If you don't trust this code, just use 'John the Ripper' Even I don't trust this. LoL
 
 # for_zip_set
 def cracking_dat_zip(zip_file, wordlist, start_line=0, end_line=None):
@@ -129,7 +129,7 @@ def main_cracking_process():
     -------------------------
       >>> Brute-Forcing <<<
     -------------------------
-          please wait...""")
+          please wait...""" + "\n")
                 break
         except ValueError:
             print(Fore.LIGHTRED_EX + "[!] Invalid Input Thread." + Style.RESET_ALL)
