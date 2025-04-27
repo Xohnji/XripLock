@@ -1,5 +1,5 @@
+import subprocess
 import pyzipper
-import rarfile
 import os
 import threading
 import time
@@ -10,6 +10,7 @@ gateway_exit = False # This will not gonna work once the threads start processin
 invalid_attempts_counter = 0
 invalid_attempts_LockedIn = threading.Lock()
 
+# DISCLAIMER: If you don't trust this code, just use 'John the Ripper' Even I don't trust this lol.
 
 # for_zip_set
 def cracking_dat_zip(zip_file, wordlist, start_line=0, end_line=None):
@@ -33,25 +34,37 @@ def cracking_dat_zip(zip_file, wordlist, start_line=0, end_line=None):
     return None
 
 
-# for_rar_set (RAR doesn't use pyzipper, which is sucks, so that's why cracking RAR is slow as hell compared to ZIP. Plus this is Python what do you expect lol.)
+# for_rar_set
+# RAR doesn't use pyzipper, which is sucks, so that's why cracking RAR is slow as hell compared to ZIP.
+# Plus this is written in Python what do you expect lol.
 def cracking_dat_rar(rar_file, wordlist, start_line=0, end_line=None):
     global invalid_attempts_counter
-    with rarfile.RarFile(rar_file) as rf:
-        reader_file = rf.namelist()[0]
-        with open(wordlist, 'r', encoding='UTF-8', errors='ignore') as file:
-            passes_list = file.readlines()[start_line:end_line]
-            for password in passes_list:
-                if gateway_exit:
-                    sys.exit(0)
-                password = password.strip()
-                try:
-                    rf.read(reader_file, pwd=password.encode('utf-8'))
+    with open(wordlist, 'r', encoding='UTF-8', errors='ignore') as file:
+        passes_list = file.readlines()[start_line:end_line]
+        for password in passes_list:
+            if gateway_exit:
+                sys.exit(0)
+            password = password.strip()
+
+            # I don't trust 'import unrar' because it's very broken. RAR4 & RAR5 have problem with each other.
+            # So I decided to just execute the unrar program command directly using 'subprocess'
+            # The UnRAR external program will then execute the command outside the script and then deliver the output into this script.  
+            try:
+                result = subprocess.run(
+                    ['unrar', 't', '-p' + password, rar_file],
+                    stdout=subprocess.PIPE, stderr=subprocess.PIPE
+                )
+                if result.returncode == 0:
                     print(Fore.LIGHTCYAN_EX + f"[+] Valid: {password}")
                     return password
-                except:
+                else:
                     with invalid_attempts_LockedIn:
                         invalid_attempts_counter += 1
                     print(Fore.LIGHTRED_EX + f"[~] Invalid: {password[:100]}", end="\n")
+            except Exception as e:
+                with invalid_attempts_LockedIn:
+                    invalid_attempts_counter += 1
+                print(Fore.LIGHTRED_EX + f"[!] Error: {str(e)}", end="\n")
     return None
 
 
