@@ -126,10 +126,10 @@ def main_cracking_process():
             threads = int(input(Fore.LIGHTYELLOW_EX + "Threads [1-5] (recommended: 1): " + Style.RESET_ALL))
             if 1 <= threads <= 5:
                 print(Fore.CYAN + r"""
-    -------------------------
-      >>> Brute-Forcing <<<
-    -------------------------
-          please wait...""" + "\n")
+    ------------------------------
+      >>> Checking Passwords <<<
+    ------------------------------
+            please wait...         """ + "\n")
                 break
         except ValueError:
             print(Fore.LIGHTRED_EX + "[!] Invalid Input Thread." + Style.RESET_ALL)
