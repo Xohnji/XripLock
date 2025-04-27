@@ -17,7 +17,7 @@ For RAR files It requires the 'UnRAR' program.
 Check out [RARLAB](https://www.rarlab.com/rar_add.htm) for more info.
 
   Debian/Ubuntu-based distros:
-  `sudo apt-get install unrar`
+  `sudo apt install unrar-free`
 
   Arch Linux:
     `sudo pacman -S unrar`
