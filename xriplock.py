@@ -24,7 +24,7 @@ def cracking_dat_zip(zip_file, wordlist, start_line=0, end_line=None):
                 password = password.strip()
                 try:
                     zipfile.read(reader_file, pwd=password.encode('UTF-8'))
-                    print(Fore.YELLOW + f"[+] Valid: {password}")
+                    print(Fore.LIGHTCYAN_EX + f"[+] Valid: {password}")
                     return password
                 except:
                     with invalid_attempts_LockedIn:
@@ -33,7 +33,7 @@ def cracking_dat_zip(zip_file, wordlist, start_line=0, end_line=None):
     return None
 
 
-# for_rar_set (RAR doesn't use pyzipper, which is sucks, so that's why cracking RAR is slow as hell compared to ZIP.)
+# for_rar_set (RAR doesn't use pyzipper, which is sucks, so that's why cracking RAR is slow as hell compared to ZIP. Plus this is Python what do you expect lol.)
 def cracking_dat_rar(rar_file, wordlist, start_line=0, end_line=None):
     global invalid_attempts_counter
     with rarfile.RarFile(rar_file) as rf:
@@ -46,7 +46,7 @@ def cracking_dat_rar(rar_file, wordlist, start_line=0, end_line=None):
                 password = password.strip()
                 try:
                     rf.read(reader_file, pwd=password.encode('utf-8'))
-                    print(Fore.YELLOW + f"[+] Valid: {password}")
+                    print(Fore.LIGHTCYAN_EX + f"[+] Valid: {password}")
                     return password
                 except:
                     with invalid_attempts_LockedIn:
@@ -124,8 +124,7 @@ def main_cracking_process():
             print(Fore.LIGHTRED_EX + "\nTerminating... [2s]")
             time.sleep(2)
             sys.exit(0)
-
-
+    Process_Timer = time.time()
 
 # THREADS OPERATION (look messy, idk how i coded this, but trust me it works :> )
 
@@ -162,12 +161,17 @@ def main_cracking_process():
         thrds.join()
 
 
+# Timer to check how long it takes to process..
+    ending = time.time()
+    elapsed = ending - Process_Timer
+    print(Fore.YELLOW + f"\n Timer: {elapsed:.2f} seconds")
+
     # Checks if the password is found correctly and also checks how many invalid attempts have been done.
     if passwords_storage_set:
-        print(Fore.LIGHTYELLOW_EX + f"\n Total Invalid Attempts: {invalid_attempts_counter}")
+        print(Fore.LIGHTYELLOW_EX + f" Total Invalid Attempts: {invalid_attempts_counter}")
         print(Fore.LIGHTGREEN_EX + f"\n[+] Password Found!: {passwords_storage_set[0]}")
     else:
-        print(Fore.LIGHTYELLOW_EX + f"\n Total Invalid Attempts: {invalid_attempts_counter}")
+        print(Fore.LIGHTYELLOW_EX + f" Total Invalid Attempts: {invalid_attempts_counter}")
         print(Fore.RED + "\n[!] Password Not Found.")
 
 if __name__ == "__main__":
