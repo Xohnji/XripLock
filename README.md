@@ -27,3 +27,7 @@ Check out [RARLAB](https://www.rarlab.com/rar_add.htm) for more info.
 
 MacOS:
   `brew install unrar`
+
+
+
+ps: there's still a lot errors with cracking rar.
