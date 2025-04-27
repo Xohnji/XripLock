@@ -1,5 +1,5 @@
 # XripLock
-ZIP/RAR Brute-Force Unlocker.
+ZIP/RAR Unlocker.
 
 *uses dictionary attack to brute-force the password for zip/rar file*
 
