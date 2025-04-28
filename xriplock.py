@@ -6,7 +6,7 @@ import time
 import sys
 from colorama import Fore, Style, init # aesthetic purposes only
 init(autoreset = True)
-gateway_exit = False # This will not gonna work once the threads start processing; it's either wait till the password cracks or wait for nothing.
+gateway_exit = False # This will not gonna work once the threads start processing; it's either wait till the password cracks or wait for nothing. (not a bug it's a feature)
 invalid_attempts_counter = 0
 invalid_attempts_LockedIn = threading.Lock()
 
