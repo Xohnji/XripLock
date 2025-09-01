@@ -141,7 +141,6 @@ def main_cracking_process():
 
     # The more larger the wordlist the more slower for it to starts cracking because it need to read the whole .TXT file.
     # Ex. rockyou.txt(139.92 MB) takes 3 seconds to starts cracking. It depends how big the size of your wordlist file.
-    # I hate Buffering Reading even It improves performance :>
     with open(wordlist_file_path, 'r', encoding='UTF-8', errors='ignore') as file:
         total_lines = len(file.readlines())
     threads_lines = total_lines // threads
@@ -187,4 +186,5 @@ def main_cracking_process():
 
 if __name__ == "__main__":
     main_cracking_process()
+
 
