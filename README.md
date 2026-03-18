@@ -1,5 +1,6 @@
 # XripLock
 ZIP/RAR Unlocker.
+ - security testing tool for archived files
 
 *uses dictionary attack to crack the password for zip/rar file*
 
